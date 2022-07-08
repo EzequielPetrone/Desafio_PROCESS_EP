@@ -11,7 +11,7 @@ const session = require('express-session');
 const handlebars = require('express-handlebars');
 const passport = require('passport');
 
-const { PORT, EXP_TIME } = require('./src/config/config') //Importo variables de entorno
+const { PORT, EXP_TIME } = require('./src/config/config') //Importo variables de config
 
 //Importo y seteo contenedor de productos
 const { ProductosDaoMongo } = require('./src/daos/productos/ProductosDaoMongo')
@@ -70,7 +70,7 @@ io.on('connection', async (socket) => {
     //Envío al nuevo socket los productos registrados al momento
     socket.emit('PRODLIST', await contenedorProd.getAll())
 
-    //Recibo, guardo y retransmito Mensajes de Chat
+    //Recibo, guardo y retransmito Productos
     socket.on('NEWPROD', async (data) => {
         try {
             let newId = await contenedorProd.saveProducto(data)

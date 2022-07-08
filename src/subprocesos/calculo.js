@@ -1,16 +1,17 @@
-process.on('message', qty => {
-    // console.log(`Mensaje del proceso padre:`);
-    // console.log(msg.qty);
-    
-    let sum = 0;
-    let array = []
-    // 6e9
-    for (let index = 0; index < qty; index++) {
-        sum += index
-        array.push(sum)
+process.on('message', qty => { 
+
+    const obj = {}
+
+    for (let index = 0; index < qty; index++) { // El proceso hijo recibe del padre la qty a iterar
+
+        const nro = Math.floor(Math.random() * 1000) + 1 // Genero nro entero aleatorio entre 1 y 1000
+
+        if (obj[nro]) {
+            obj[nro] += 1 // Si ya existe dentro del objeto ese nro como key, incremento su value
+        } else {
+            obj[nro] = 1 // sino creo ese nro como key y le asigno value 1
+        }
     }
-    // Me falta terminar la lógica del cálculo... 
-    // Todo lo relacionado a crear el fork y comunicar padre e hijo está implementado, 
-    // pero me falta que el algoritmo sea el de la consigna.
-    process.send(array)
+
+    process.send(obj) // Devuelvo al proceso padre el objeto calculado
 })

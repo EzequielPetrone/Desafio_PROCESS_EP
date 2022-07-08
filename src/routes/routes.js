@@ -74,9 +74,10 @@ router.get('/logout', (req, res) => {
 router.get('/checkAuth', (req, res) => res.json({ auth: req.isAuthenticated() }));
 
 // INFO
-router.get('/info', (req, res) => { 
+router.get('/info', (req, res) => {
     // Esta vista la dejé como un JSON formateado, si llego a tener tiempo le diseño un html...
     res.type('json').send(JSON.stringify(PROCESS_INFO, null, 2))
+    // res.json(PROCESS_INFO)
 });
 
 //  FAIL ROUTE
