@@ -6,7 +6,9 @@ Además en config/config.js utilizo YARGS para setear el Puerto según parámetr
 Se puede usar: -p | --puerto | --port
 Ejemplo: node server.js -p 8081
 
-También en config/config.js armo el objeto que utilizo en la ruta '/info' para mostrar información sobre el Node Process. (Esa vista la dejé como un JSON formateado, si me alcanza el tiempo le hago un html...)
+También en config/config.js armo el objeto que utilizo en la ruta '/info' para mostrar información sobre el Node Process. 
+El único dato que vale la pena obtenerlo en tiempo real al momento del request es el uso de memoria total (rss), el resto de la data siempre es la mismo una vez iniciado el server.
+(Esa vista la dejé como un JSON formateado, si me alcanza el tiempo le hago un html...)
 
 En routes/routes.js el routing de todo lo que es home, login, signup, logout e info.
 

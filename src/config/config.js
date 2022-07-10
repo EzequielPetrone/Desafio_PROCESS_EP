@@ -10,16 +10,18 @@ console.log('------ Parámetros YARGS ------');
 console.log(argv)
 console.log('------------------------------');
 
+delete argv.$0 //Elimino el atributo por defecto que contiene el nombre del file
+
 //Armo objeto con info relevante del Node Process
 const info = {
   argumentos_entrada: process.argv.slice(2),
-  argumentos_entrada_yargs: yargs.argv,
+  argumentos_entrada_yargs: argv,
   plataforma: process.platform,
   path_ejec: process.execPath,
   node_version: process.version,
   pid: process.pid,
   carpeta_proyecto: process.cwd(),
-  rss: process.memoryUsage().rss
+  // rss: process.memoryUsage().rss //Esto particularmente me conviene calcularlo dinámicamente por cada request
 }
 
 module.exports = {

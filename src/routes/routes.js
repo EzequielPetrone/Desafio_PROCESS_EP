@@ -8,7 +8,7 @@ router.use(express.urlencoded({ extended: true }));
 
 const { passport } = require('../auth/auth') //Importo mi passport ya configurado
 
-const { PROCESS_INFO } = require('../config/config') //Importo info de process
+const { PROCESS_INFO } = require('../config/config') //Importo objeto con info del Node process
 
 //  INDEX
 router.get('/', (req, res) => {
@@ -75,6 +75,11 @@ router.get('/checkAuth', (req, res) => res.json({ auth: req.isAuthenticated() })
 
 // INFO
 router.get('/info', (req, res) => {
+    // Le agrego al objeto con los datos del node process el uso de memoria total (rss)
+    // ya que es el único dato que vale la pena obtenerlo en tiempo real al momento del request
+    // el resto de la data siempre es la misma una vez iniciado el server
+    PROCESS_INFO.rss = process.memoryUsage().rss
+
     // Esta vista la dejé como un JSON formateado, si llego a tener tiempo le diseño un html...
     res.type('json').send(JSON.stringify(PROCESS_INFO, null, 2))
     // res.json(PROCESS_INFO)
